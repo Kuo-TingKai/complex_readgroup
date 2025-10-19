@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>複雜系統觀：跨層級整合的視角</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 40px;
+            border-radius: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            color: #2c3e50;
+            margin-bottom: 10px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .header h2 {
+            font-size: 1.2em;
+            color: #7f8c8d;
+            font-weight: 300;
+        }
+
+        .nav {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav ul {
+            list-style: none;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .nav a {
+            text-decoration: none;
+            color: #2c3e50;
+            padding: 10px 20px;
+            border-radius: 25px;
+            background: linear-gradient(45deg, #f8f9fa, #e9ecef);
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .nav a:hover {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .section {
+            background: rgba(255, 255, 255, 0.95);
+            margin-bottom: 30px;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .section:hover {
+            transform: translateY(-5px);
+        }
+
+        .section h2 {
+            color: #2c3e50;
+            font-size: 2em;
+            margin-bottom: 20px;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 10px;
+        }
+
+        .section h3 {
+            color: #34495e;
+            font-size: 1.5em;
+            margin: 25px 0 15px 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section h4 {
+            color: #2c3e50;
+            font-size: 1.2em;
+            margin: 20px 0 10px 0;
+        }
+
+        .concept-card {
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            padding: 20px;
+            border-radius: 15px;
+            margin: 15px 0;
+            border-left: 5px solid #667eea;
+            transition: all 0.3s ease;
+        }
+
+        .concept-card:hover {
+            transform: translateX(10px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .concept-title {
+            font-weight: bold;
+            color: #2c3e50;
+            font-size: 1.1em;
+            margin-bottom: 10px;
+        }
+
+        .concept-explanation {
+            color: #555;
+            margin-bottom: 10px;
+        }
+
+        .concept-insight {
+            background: rgba(102, 126, 234, 0.1);
+            padding: 10px;
+            border-radius: 8px;
+            font-style: italic;
+            color: #2c3e50;
+            margin-top: 10px;
+        }
+
+        .math-expression {
+            background: #2c3e50;
+            color: #ecf0f1;
+            padding: 10px;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            margin: 10px 0;
+            text-align: center;
+        }
+
+        .example-box {
+            background: linear-gradient(135deg, #e8f5e8, #d4edda);
+            padding: 15px;
+            border-radius: 10px;
+            margin: 10px 0;
+            border-left: 4px solid #28a745;
+        }
+
+        .tool-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .tool-item {
+            background: linear-gradient(135deg, #fff3cd, #ffeaa7);
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+            border: 2px solid #f39c12;
+            transition: all 0.3s ease;
+        }
+
+        .tool-item:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .quote {
+            background: linear-gradient(135deg, #f8d7da, #f5c6cb);
+            padding: 20px;
+            border-radius: 15px;
+            margin: 20px 0;
+            border-left: 5px solid #dc3545;
+            font-style: italic;
+            font-size: 1.1em;
+            color: #721c24;
+        }
+
+        .interactive-demo {
+            background: linear-gradient(135deg, #d1ecf1, #bee5eb);
+            padding: 20px;
+            border-radius: 15px;
+            margin: 20px 0;
+            border: 2px solid #17a2b8;
+        }
+
+        .demo-button {
+            background: linear-gradient(45deg, #17a2b8, #138496);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1em;
+            margin: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .demo-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .footer {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 30px;
+            border-radius: 20px;
+            margin-top: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .footer h3 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+        }
+
+        .footer p {
+            color: #7f8c8d;
+            font-size: 1.1em;
+        }
+
+        @media (max-width: 768px) {
+            .nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .header h1 {
+                font-size: 2em;
+            }
+            
+            .section {
+                padding: 20px;
+            }
+            
+            .tool-list {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .emoji {
+            font-size: 1.2em;
+            margin-right: 8px;
+        }
+
+        .highlight {
+            background: linear-gradient(120deg, #a8edea 0%, #fed6e3 100%);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🧩 複雜系統觀：跨層級整合的視角</h1>
+            <h2>Complex Systems Perspective: Multi-Scale Integration View</h2>
+        </div>
+
+        <nav class="nav">
+            <ul>
+                <li><a href="#core-orientations">核心取向</a></li>
+                <li><a href="#mathematical-frameworks">數學框架</a></li>
+                <li><a href="#philosophical-attitude">哲學態度</a></li>
+                <li><a href="#implementation">實作導向</a></li>
+                <li><a href="#expressions">典型表達</a></li>
+            </ul>
+        </nav>
+
+        <section id="core-orientations" class="section">
+            <h2>🧩 核心取向 / Core Orientations</h2>
+            
+            <div class="concept-card">
+                <h3>🔄 跨層級整合（Multi-scale Integration）</h3>
+                <div class="concept-title">核心概念：</div>
+                <div class="concept-explanation">複雜系統是「跨尺度的相依結構」</div>
+                
+                <div class="example-box">
+                    <h4>🌆 城市系統類比：</h4>
+                    <ul>
+                        <li>🏠 <strong>局部層級：</strong> 個別家庭、社區</li>
+                        <li>🏢 <strong>中層級：</strong> 商業區、交通網絡</li>
+                        <li>🌆 <strong>全域層級：</strong> 整個城市規劃</li>
+                    </ul>
+                </div>
+                
+                <div class="concept-insight">
+                    <strong>關鍵洞察：</strong> 每個層級都有其運作邏輯，但它們之間存在資訊流動
+                </div>
+                
+                <div class="math-expression">
+                    範疇論 + 張量網絡 + 整合資訊 Φ
+                </div>
+            </div>
+
+            <div class="concept-card">
+                <h3>🔄 結構即動態（Structure as Dynamics）</h3>
+                <div class="concept-title">核心概念：</div>
+                <div class="concept-explanation">結構不是靜態的，而是可演化的運算形式</div>
+                
+                <div class="example-box">
+                    <h4>🌱 生物成長類比：</h4>
+                    <ul>
+                        <li>🌱 <strong>種子階段：</strong> 簡單的基因結構</li>
+                        <li>🌿 <strong>成長過程：</strong> 結構不斷演化</li>
+                        <li>🌳 <strong>成熟階段：</strong> 複雜但穩定的形態</li>
+                    </ul>
+                </div>
+                
+                <div class="concept-insight">
+                    <strong>關鍵洞察：</strong> 系統的結構會隨著觀測層級和時間變化
+                </div>
+                
+                <div class="math-expression">
+                    函子轉換 (functorial transformation)
+                </div>
+            </div>
+
+            <div class="concept-card">
+                <h3>🧠 語言—神經—意識的複雜體</h3>
+                <div class="concept-title">核心概念：</div>
+                <div class="concept-explanation">三個看似不同的系統，實際上是同一個複雜系統的不同投影</div>
+                
+                <div class="example-box">
+                    <h4>💎 鑽石切面類比：</h4>
+                    <ul>
+                        <li>💎 <strong>語言面：</strong> 符號與語法</li>
+                        <li>🧠 <strong>神經面：</strong> 神經元與突觸</li>
+                        <li>🌟 <strong>意識面：</strong> 主觀體驗</li>
+                    </ul>
+                </div>
+                
+                <div class="concept-insight">
+                    <strong>關鍵洞察：</strong> 它們之間存在自然同構關係
+                </div>
+                
+                <div class="math-expression">
+                    ∞-範疇模型
+                </div>
+            </div>
+
+            <div class="concept-card">
+                <h3>🔄 非線性與自指</h3>
+                <div class="concept-title">核心概念：</div>
+                <div class="concept-explanation">複雜系統的核心特性是自指、自組織、非線性穩態</div>
+                
+                <div class="example-box">
+                    <h4>🪞 鏡子照鏡子類比：</h4>
+                    <ul>
+                        <li>🪞 <strong>自指：</strong> 系統能夠觀察自己</li>
+                        <li>🔄 <strong>自組織：</strong> 系統能夠自我調整</li>
+                        <li>⚖️ <strong>非線性穩態：</strong> 平衡點會動態變化</li>
+                    </ul>
+                </div>
+                
+                <div class="concept-insight">
+                    <strong>關鍵洞察：</strong> 系統能夠觀察與修改自身的觀察邊界
+                </div>
+                
+                <div class="math-expression">
+                    meta-level shifting
+                </div>
+            </div>
+        </section>
+
+        <section id="mathematical-frameworks" class="section">
+            <h2>🧮 數學框架 / Mathematical Frameworks</h2>
+            
+            <div class="concept-card">
+                <h3>📐 範疇論 (Category Theory)</h3>
+                <div class="concept-title">作用：</div>
+                <div class="concept-explanation">結構與觀測轉換的語言</div>
+                
+                <div class="tool-list">
+                    <div class="tool-item">
+                        <div class="emoji">🔍</div>
+                        <strong>Lens</strong><br>
+                        觀測工具
+                    </div>
+                    <div class="tool-item">
+                        <div class="emoji">🔄</div>
+                        <strong>Functor</strong><br>
+                        結構轉換器
+                    </div>
+                    <div class="tool-item">
+                        <div class="emoji">🔗</div>
+                        <strong>Adjunction</strong><br>
+                        對偶關係
+                    </div>
+                    <div class="tool-item">
+                        <div class="emoji">📊</div>
+                        <strong>Yoneda</strong><br>
+                        表示定理
+                    </div>
+                </div>
+                
+                <div class="concept-insight">
+                    <strong>通俗理解：</strong> 就像不同語言之間的翻譯規則
+                </div>
+            </div>
+
+            <div class="concept-card">
+                <h3>🕸️ 張量網絡 (Tensor Network)</h3>
+                <div class="concept-title">作用：</div>
+                <div class="concept-explanation">建模神經結構的資訊整合</div>
+                
+                <div class="example-box">
+                    <h4>🔌 神經網絡接線圖：</h4>
+                    <ul>
+                        <li>🔌 <strong>節點：</strong> 神經元</li>
+                        <li>🔗 <strong>連線：</strong> 突觸</li>
+                        <li>⚡ <strong>資訊流：</strong> 神經信號</li>
+                    </ul>
+                </div>
+                
+                <div class="concept-insight">
+                    <strong>應用：</strong> 理解大腦如何處理複雜資訊
+                </div>
+            </div>
+
+            <div class="concept-card">
+                <h3>🧮 整合資訊理論 (IIT) 與 Φ 結構</h3>
+                <div class="concept-title">作用：</div>
+                <div class="concept-explanation">複雜系統整合度與意識的度量</div>
+                
+                <div class="interactive-demo">
+                    <h4>📊 Φ 值解釋：</h4>
+                    <button class="demo-button" onclick="showPhiExplanation('high')">高 Φ 值</button>
+                    <button class="demo-button" onclick="showPhiExplanation('low')">低 Φ 值</button>
+                    <button class="demo-button" onclick="showPhiExplanation('dynamic')">動態 Φ</button>
+                    <div id="phi-explanation" style="margin-top: 15px; padding: 15px; background: rgba(255,255,255,0.8); border-radius: 10px; display: none;">
+                        <p id="phi-text"></p>
+                    </div>
+                </div>
+                
+                <div class="concept-insight">
+                    <strong>通俗理解：</strong> 就像測量一個團隊的「協作度」
+                </div>
+            </div>
+
+            <div class="concept-card">
+                <h3>🏗️ Topos / Stack 結構</h3>
+                <div class="concept-title">作用：</div>
+                <div class="concept-explanation">對應不同層級的「觀測邊界」與「邏輯閉包」</div>
+                
+                <div class="example-box">
+                    <h4>🔍 觀察窗口類比：</h4>
+                    <ul>
+                        <li>🔍 <strong>微觀窗口：</strong> 原子層級</li>
+                        <li>👁️ <strong>中觀窗口：</strong> 細胞層級</li>
+                        <li>🌍 <strong>宏觀窗口：</strong> 生態層級</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="philosophical-attitude" class="section">
+            <h2>🧠 哲學態度 / Philosophical Attitude</h2>
+            
+            <div class="concept-card">
+                <h3>🔬 反還原論而非反科學</h3>
+                <div class="concept-title">核心立場：</div>
+                <div class="concept-explanation">不否定還原論分析，但主張它不足以捕捉系統的 emergent 層級</div>
+                
+                <div class="example-box">
+                    <h4>🎼 交響樂理解類比：</h4>
+                    <ul>
+                        <li>🎵 <strong>還原論：</strong> 分析每個音符</li>
+                        <li>🎼 <strong>整體論：</strong> 理解音樂的整體美感</li>
+                        <li>🎭 <strong>複雜系統觀：</strong> 理解音符如何創造出超越個別音符的美</li>
+                    </ul>
+                </div>
+                
+                <div class="concept-insight">
+                    <strong>關鍵洞察：</strong> 需要多層級的理解方式
+                </div>
+            </div>
+
+            <div class="concept-card">
+                <h3>🔄 認識論上的自反性</h3>
+                <div class="concept-title">核心概念：</div>
+                <div class="concept-explanation">複雜性本身與觀測框架有關</div>
+                
+                <div class="example-box">
+                    <h4>📷 不同相機拍攝類比：</h4>
+                    <ul>
+                        <li>📷 <strong>微距鏡頭：</strong> 看到細節</li>
+                        <li>📸 <strong>廣角鏡頭：</strong> 看到全景</li>
+                        <li>🎥 <strong>慢動作：</strong> 看到時間細節</li>
+                    </ul>
+                </div>
+                
+                <div class="concept-insight">
+                    <strong>關鍵洞察：</strong> 「觀看差異」本身就是理解複雜性的關鍵
+                </div>
+            </div>
+
+            <div class="concept-card">
+                <h3>⚙️ 形式化即理解</h3>
+                <div class="concept-title">核心主張：</div>
+                <div class="concept-explanation">理解複雜性的方式是建立能執行的結構性模型</div>
+                
+                <div class="example-box">
+                    <h4>🛩️ 模型飛機建造類比：</h4>
+                    <ul>
+                        <li>🛩️ <strong>理論：</strong> 空氣動力學原理</li>
+                        <li>🔧 <strong>實作：</strong> 建造可飛行的模型</li>
+                        <li>✈️ <strong>驗證：</strong> 實際飛行測試</li>
+                    </ul>
+                </div>
+                
+                <div class="concept-insight">
+                    <strong>關鍵洞察：</strong> 真正的理解來自於可執行的模型
+                </div>
+            </div>
+        </section>
+
+        <section id="implementation" class="section">
+            <h2>⚙️ 實作導向 / Implementation-Oriented</h2>
+            
+            <div class="concept-card">
+                <h3>💻 理論–實作對接</h3>
+                <div class="concept-title">目標：</div>
+                <div class="concept-explanation">將複雜系統理論落實為可運算的模型</div>
+                
+                <div class="tool-list">
+                    <div class="tool-item">
+                        <div class="emoji">🦀</div>
+                        <strong>Rust</strong><br>
+                        系統程式設計
+                    </div>
+                    <div class="tool-item">
+                        <div class="emoji">🎯</div>
+                        <strong>Haskell</strong><br>
+                        函數式程式設計
+                    </div>
+                    <div class="tool-item">
+                        <div class="emoji">🐍</div>
+                        <strong>Python</strong><br>
+                        科學計算
+                    </div>
+                </div>
+                
+                <div class="concept-insight">
+                    <strong>具體專案：</strong>
+                    <ul>
+                        <li>📝 範疇式 DSL：可轉譯成電路</li>
+                        <li>🧮 Φ tensor 模型：意識計算</li>
+                        <li>🔄 Functor 轉換器：結構轉換</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="concept-card">
+                <h3>🎯 可執行模型列表</h3>
+                <div class="tool-list">
+                    <div class="tool-item">
+                        <div class="emoji">📝</div>
+                        <strong>.cat DSL</strong><br>
+                        範疇論程式設計語言
+                    </div>
+                    <div class="tool-item">
+                        <div class="emoji">⚡</div>
+                        <strong>Netlist 模擬器</strong><br>
+                        電路模擬
+                    </div>
+                    <div class="tool-item">
+                        <div class="emoji">🧮</div>
+                        <strong>Φ 計算器</strong><br>
+                        意識度量工具
+                    </div>
+                    <div class="tool-item">
+                        <div class="emoji">🕸️</div>
+                        <strong>張量網絡視覺化</strong><br>
+                        神經結構展示
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="expressions" class="section">
+            <h2>🧭 典型表達 / Typical Expressions</h2>
+            
+            <div class="concept-card">
+                <h3>🎭 詩性與系統性並重</h3>
+                
+                <div class="quote">
+                    「觀看世界的方式本身是一個範疇。」
+                </div>
+                
+                <div class="quote">
+                    「結構是可觀測性的邊界，而複雜性就是這個邊界的可變性。」
+                </div>
+                
+                <div class="concept-insight">
+                    <strong>風格特點：</strong>
+                    <ul>
+                        <li>🌟 <strong>詩性：</strong> 富有想像力的表達</li>
+                        <li>🔬 <strong>系統性：</strong> 嚴謹的邏輯結構</li>
+                        <li>🔄 <strong>自反性：</strong> 對自身觀察的觀察</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>🎯 總結 / Summary</h2>
+            
+            <div class="concept-card">
+                <h3>🚀 核心洞察</h3>
+                <div class="tool-list">
+                    <div class="tool-item">
+                        <div class="emoji">🧩</div>
+                        <strong>跨層級整合</strong><br>
+                        複雜系統需要多尺度理解
+                    </div>
+                    <div class="tool-item">
+                        <div class="emoji">🔄</div>
+                        <strong>結構即動態</strong><br>
+                        結構會隨時間和觀測層級變化
+                    </div>
+                    <div class="tool-item">
+                        <div class="emoji">🪞</div>
+                        <strong>自指性</strong><br>
+                        系統能夠觀察和修改自身
+                    </div>
+                    <div class="tool-item">
+                        <div class="emoji">⚙️</div>
+                        <strong>形式化理解</strong><br>
+                        真正的理解來自可執行的模型
+                    </div>
+                </div>
+            </div>
+
+            <div class="concept-card">
+                <h3>🌍 未來方向</h3>
+                <div class="tool-list">
+                    <div class="tool-item">
+                        <div class="emoji">🔬</div>
+                        <strong>理論發展</strong><br>
+                        更精確的數學模型
+                    </div>
+                    <div class="tool-item">
+                        <div class="emoji">💻</div>
+                        <strong>實作應用</strong><br>
+                        可運算的複雜系統
+                    </div>
+                    <div class="tool-item">
+                        <div class="emoji">🌍</div>
+                        <strong>跨領域整合</strong><br>
+                        連接不同學科
+                    </div>
+                    <div class="tool-item">
+                        <div class="emoji">🎓</div>
+                        <strong>教育推廣</strong><br>
+                        讓更多人理解複雜系統
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <footer class="footer">
+            <h3>🙏 感謝聆聽！</h3>
+            <p><em>讓我們一起探索複雜系統的奧秘！</em></p>
+            <p><em>Let's explore the mysteries of complex systems together!</em></p>
+        </footer>
+    </div>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Interactive Phi explanation
+        function showPhiExplanation(type) {
+            const explanationDiv = document.getElementById('phi-explanation');
+            const textDiv = document.getElementById('phi-text');
+            
+            explanationDiv.style.display = 'block';
+            
+            switch(type) {
+                case 'high':
+                    textDiv.innerHTML = `
+                        <strong>📊 高 Φ 值：</strong> 系統整合度高，意識強<br>
+                        <em>就像一個高度協調的樂團，每個成員都能完美配合</em>
+                    `;
+                    break;
+                case 'low':
+                    textDiv.innerHTML = `
+                        <strong>📉 低 Φ 值：</strong> 系統分散，意識弱<br>
+                        <em>就像一群各自為政的個體，缺乏整體協調</em>
+                    `;
+                    break;
+                case 'dynamic':
+                    textDiv.innerHTML = `
+                        <strong>🔄 動態 Φ：</strong> 意識的變化過程<br>
+                        <em>就像意識在不同狀態間流動，時而集中時而分散</em>
+                    `;
+                    break;
+            }
+        }
+
+        // Add some interactive animations
+        document.addEventListener('DOMContentLoaded', function() {
+            // Animate sections on scroll
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            });
+
+            document.querySelectorAll('.section').forEach(section => {
+                section.style.opacity = '0';
+                section.style.transform = 'translateY(20px)';
+                section.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                observer.observe(section);
+            });
+        });
+    </script>
+</body>
+</html>
